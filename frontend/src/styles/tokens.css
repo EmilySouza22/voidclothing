@@ -1,0 +1,31 @@
+:root {
+  --preto: #0a0a0a;
+  --grafite: #141414;
+  --cinza-900: #1c1c1c;
+  --cinza-800: #2a2a2a;
+  --cinza-600: #5c5c5c;
+  --cinza-400: #9a9a9a;
+  --cinza-200: #d4d4d4;
+  --cinza-100: #ececec;
+  --branco: #ffffff;
+
+  --sucesso: #4ade80;
+  --erro: #f87171;
+  --aviso: #fbbf24;
+
+  --fonte: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+
+  --espaco-1: 0.25rem;
+  --espaco-2: 0.5rem;
+  --espaco-3: 0.75rem;
+  --espaco-4: 1rem;
+  --espaco-6: 1.5rem;
+  --espaco-8: 2rem;
+  --espaco-12: 3rem;
+  --espaco-16: 4rem;
+
+  --raio: 4px;
+  --raio-grande: 10px;
+  --borda: 1px solid var(--cinza-800);
+  --largura-max: 1200px;
+}
