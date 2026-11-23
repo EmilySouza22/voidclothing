@@ -1,6 +1,3 @@
-/* Dica: mova esta linha para o index.html ou index.css para valer em todo o site */
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,100..900&family=Inter:wght@400;500;600&display=swap");
-
 .login {
   --void-black: #111111;
   --void-gray: #8c8c8c;
@@ -10,24 +7,23 @@
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 72px);
   font-family: "Inter", Arial, sans-serif;
   color: var(--void-black);
 }
 
-/* ---------- Lado esquerdo: imagem ---------- */
+/* ---------- Lado esquerdo: foto do modelo ---------- */
 .login__hero {
   position: relative;
   display: flex;
   align-items: flex-end;
   padding: 3.5rem;
   background-color: #1b1b1b;
-  /* coloque a foto em frontend/public/assets/img/login-hero.jpg */
   background-image:
-    linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.05) 60%),
-    url("/assets/img/login-hero.jpg");
+    linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0) 55%),
+    url("/assets/img/logo/modelo-void.png");
   background-size: cover;
-  background-position: center;
+  background-position: center 20%;
 }
 
 .login__hero-text {
@@ -78,7 +74,7 @@
 .login__star {
   align-self: center;
   margin-bottom: 0.9rem;
-  filter: invert(1); /* a estrela do projeto é branca; aqui precisa ser preta */
+  filter: invert(1);
 }
 
 .login__form h1 {
@@ -103,6 +99,7 @@
   margin: 0 0 1.25rem;
   padding: 0.75rem 0.9rem;
   border: 1px solid var(--void-error);
+  border-radius: 6px;
   background: #fbeceb;
   color: var(--void-error);
   font-size: 0.82rem;
@@ -126,8 +123,9 @@
 .field input {
   width: 100%;
   box-sizing: border-box;
-  padding: 0.8rem 0.9rem;
+  padding: 0.85rem 0.95rem;
   border: 1px solid var(--void-line);
+  border-radius: 6px;
   background: #ffffff;
   font: inherit;
   font-size: 0.85rem;
@@ -183,33 +181,36 @@
 }
 
 /* ---------- Botões ---------- */
-.btn {
+.login-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
   width: 100%;
+  box-sizing: border-box;
   padding: 0.95rem 1rem;
-  font: inherit;
+  border-radius: 6px;
+  font-family: "Inter", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.btn--primary {
+.login-btn--primary {
   margin-top: 0.4rem;
   border: 1px solid var(--void-black);
   background: var(--void-black);
   color: #ffffff;
 }
 
-.btn--primary:hover:not(:disabled) {
+.login-btn--primary:hover:not(:disabled) {
   background: #000000;
 }
 
-.btn--outline {
+.login-btn--outline {
   border: 1px solid var(--void-black);
   background: transparent;
   color: var(--void-black);
@@ -218,12 +219,16 @@
   font-weight: 600;
 }
 
-.btn:disabled {
-  opacity: 0.55;
+.login-btn--outline:hover:not(:disabled) {
+  background: #ebebe8;
+}
+
+.login-btn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-.btn:focus-visible {
+.login-btn:focus-visible {
   outline: 2px solid var(--void-black);
   outline-offset: 3px;
 }
