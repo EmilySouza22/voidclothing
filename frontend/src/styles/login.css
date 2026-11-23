@@ -1,0 +1,285 @@
+/* Dica: mova esta linha para o index.html ou index.css para valer em todo o site */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,100..900&family=Inter:wght@400;500;600&display=swap");
+
+.login {
+  --void-black: #111111;
+  --void-gray: #8c8c8c;
+  --void-bg: #f4f4f2;
+  --void-line: #d6d6d2;
+  --void-error: #b3261e;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 120px);
+  font-family: "Inter", Arial, sans-serif;
+  color: var(--void-black);
+}
+
+/* ---------- Lado esquerdo: imagem ---------- */
+.login__hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 3.5rem;
+  background-color: #1b1b1b;
+  /* coloque a foto em frontend/public/assets/img/login-hero.jpg */
+  background-image:
+    linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.05) 60%),
+    url("/assets/img/login-hero.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.login__hero-text {
+  color: #ffffff;
+}
+
+.login__hero-text h2 {
+  margin: 0;
+  font-family: "Archivo", Arial, sans-serif;
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.login__hero-line {
+  display: block;
+  width: 5.5rem;
+  height: 1px;
+  margin: 1.25rem 0 0.9rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.login__hero-text p {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+/* ---------- Lado direito: formulário ---------- */
+.login__panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: var(--void-bg);
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 420px;
+}
+
+.login__star {
+  align-self: center;
+  margin-bottom: 0.9rem;
+  filter: invert(1); /* a estrela do projeto é branca; aqui precisa ser preta */
+}
+
+.login__form h1 {
+  margin: 0;
+  text-align: center;
+  font-family: "Archivo", Arial, sans-serif;
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: 2.1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.login__subtitle {
+  margin: 0.35rem 0 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--void-gray);
+}
+
+.login__alert {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--void-error);
+  background: #fbeceb;
+  color: var(--void-error);
+  font-size: 0.82rem;
+}
+
+/* ---------- Campos ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.15rem;
+}
+
+.field label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--void-line);
+  background: #ffffff;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--void-black);
+}
+
+.field input::placeholder {
+  color: #9a9a96;
+}
+
+.field input:focus-visible {
+  outline: 2px solid var(--void-black);
+  outline-offset: 1px;
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--void-error);
+}
+
+.field__password {
+  position: relative;
+}
+
+.field__password input {
+  padding-right: 2.8rem;
+}
+
+.field__toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.8rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--void-gray);
+  cursor: pointer;
+}
+
+.field__toggle:hover {
+  color: var(--void-black);
+}
+
+.field__toggle:focus-visible {
+  outline: 2px solid var(--void-black);
+  outline-offset: 2px;
+}
+
+.field__error {
+  font-size: 0.75rem;
+  color: var(--void-error);
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn--primary {
+  margin-top: 0.4rem;
+  border: 1px solid var(--void-black);
+  background: var(--void-black);
+  color: #ffffff;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: #000000;
+}
+
+.btn--outline {
+  border: 1px solid var(--void-black);
+  background: transparent;
+  color: var(--void-black);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-weight: 600;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--void-black);
+  outline-offset: 3px;
+}
+
+/* ---------- Rodapé do formulário ---------- */
+.login__divider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.4rem 0;
+  font-size: 0.72rem;
+  color: var(--void-gray);
+}
+
+.login__divider::before,
+.login__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--void-line);
+}
+
+.login__link {
+  align-self: center;
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--void-black);
+}
+
+.login__signup {
+  margin: 0.8rem 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #55554f;
+}
+
+.login__signup a {
+  color: var(--void-black);
+  font-weight: 600;
+}
+
+/* ---------- Telas menores (versão completa para celular fica para a próxima etapa) ---------- */
+@media (max-width: 900px) {
+  .login {
+    grid-template-columns: 1fr;
+  }
+
+  .login__hero {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
