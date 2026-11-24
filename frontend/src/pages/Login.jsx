@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 import "../styles/login.css";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -8,6 +9,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
 
   const [form, setForm] = useState({ email: "", senha: "" });
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -52,8 +54,8 @@ export default function Login() {
         senha: form.senha,
       });
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("usuario", JSON.stringify(data.usuario));
+      // Grava no localStorage E avisa o contexto (RotaPrivada, cabeçalho etc.)
+      login(data.token, data.usuario);
 
       // volta para a página que a pessoa tentava acessar, se houver
       const origem = location.state?.from?.pathname;
@@ -68,7 +70,8 @@ export default function Login() {
       if (!err.response) {
         setErroApi("Não foi possível conectar ao servidor. Tente de novo em instantes.");
       } else {
-        setErroApi(err.response.data?.mensagem || "E-mail ou senha incorretos.");
+        // O back responde { erro: '...' } (e não "mensagem")
+        setErroApi(err.response.data?.erro || "Não foi possível entrar. Tente novamente.");
       }
     } finally {
       setCarregando(false);

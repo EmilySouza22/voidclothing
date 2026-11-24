@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 import "../styles/minhaconta.css";
 
 // Ícones em SVG (traço simples, no mesmo estilo do resto do site)
@@ -116,14 +117,10 @@ const moeda = (valor) =>
   Number(valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const dataBR = (iso) => new Date(iso).toLocaleDateString("pt-BR");
 
-function limparSessao() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("usuario");
-}
-
 export default function MinhaConta() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { token, logout } = useAuth();
 
   const [usuario, setUsuario] = useState(null);
   const [resumo, setResumo] = useState(null);
@@ -132,9 +129,13 @@ export default function MinhaConta() {
   const [carregando, setCarregando] = useState(true);
   const [tentativa, setTentativa] = useState(0);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+  // O logout do contexto limpa o localStorage (com as chaves certas)
+  // e avisa o site inteiro (cabeçalho, RotaPrivada etc.).
+  function encerrarSessao() {
+    logout();
+  }
 
+  useEffect(() => {
     // Sem login: manda para o login e volta para cá depois
     if (!token) {
       navigate("/login", { replace: true, state: { from: { pathname: location.pathname } } });
@@ -158,7 +159,7 @@ export default function MinhaConta() {
         if (cancelado) return;
         if (err.response?.status === 401) {
           // Sessão expirada ou inválida
-          limparSessao();
+          encerrarSessao();
           navigate("/login", { replace: true, state: { from: { pathname: location.pathname } } });
           return;
         }
@@ -176,7 +177,8 @@ export default function MinhaConta() {
     return () => {
       cancelado = true;
     };
-  }, [navigate, location.pathname, tentativa]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, navigate, location.pathname, tentativa]);
 
   function tentarDeNovo() {
     setErro("");
@@ -185,7 +187,7 @@ export default function MinhaConta() {
   }
 
   function sair() {
-    limparSessao();
+    encerrarSessao();
     navigate("/login", { replace: true });
   }
 
@@ -197,11 +199,11 @@ export default function MinhaConta() {
     );
   }
 
-  if (erro) {
+  if (erro || !usuario || !resumo) {
     return (
       <main className="conta">
         <div className="conta__aviso" role="alert">
-          <p>{erro}</p>
+          <p>{erro || "Não foi possível carregar sua conta."}</p>
           <button type="button" className="conta__botao" onClick={tentarDeNovo}>
             Tentar novamente
           </button>
@@ -210,8 +212,10 @@ export default function MinhaConta() {
     );
   }
 
-  const primeiroNome = usuario.nome.split(" ")[0];
-  const pedidosFiltrados = resumo.pedidos.filter(
+  const nome = usuario.nome || "";
+  const primeiroNome = nome.split(" ")[0];
+  const pedidos = resumo.pedidos ?? [];
+  const pedidosFiltrados = pedidos.filter(
     (p) => filtro === "todos" || STATUS[p.status]?.tipo === filtro
   );
 
@@ -270,7 +274,7 @@ export default function MinhaConta() {
             </div>
 
             <div>
-              <h2 className="conta__nome">{usuario.nome}</h2>
+              <h2 className="conta__nome">{nome}</h2>
               <p className="conta__email">{usuario.email}</p>
               {/* Edição de perfil fica para a próxima parte */}
               <button type="button" className="conta__editar" disabled title="Em breve">
@@ -279,13 +283,13 @@ export default function MinhaConta() {
             </div>
 
             <div className="conta__stat">
-              <strong>{resumo.totalPedidos}</strong>
+              <strong>{resumo.totalPedidos ?? pedidos.length}</strong>
               <span>Pedidos realizados</span>
             </div>
 
             <div className="conta__stat">
               <Icone nome="pin" />
-              <strong>{resumo.totalEnderecos}</strong>
+              <strong>{resumo.totalEnderecos ?? 0}</strong>
               <span>Endereços salvos</span>
             </div>
           </section>
@@ -307,10 +311,10 @@ export default function MinhaConta() {
               </select>
             </div>
 
-            {resumo.pedidos.length === 0 ? (
+            {pedidos.length === 0 ? (
               <div className="conta__aviso">
                 <p>Você ainda não fez nenhum pedido.</p>
-                <Link to="/produtos">Ver produtos</Link>
+                <Link to="/catalogo">Ver produtos</Link>
               </div>
             ) : pedidosFiltrados.length === 0 ? (
               <p className="conta__aviso">Nenhum pedido com esse status.</p>
@@ -336,7 +340,7 @@ export default function MinhaConta() {
                         {st.texto}
                       </span>
 
-                      <Link className="conta__detalhes" to={`/meus-pedidos/${p.id}`}>
+                      <Link className="conta__detalhes" to="/meus-pedidos">
                         Ver detalhes <Icone nome="seta" tamanho={16} />
                       </Link>
                     </li>

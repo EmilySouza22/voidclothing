@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 import "../styles/cadastro.css";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,6 +48,7 @@ function CampoSenha({ id, name, label, placeholder, value, onChange, erro }) {
 
 export default function Cadastro() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [form, setForm] = useState({
     nome: "",
@@ -113,9 +115,9 @@ export default function Cadastro() {
         aceitouTermos: form.aceito,
       });
 
-      // Conta criada: já entra logado (mesmo padrão do Login.jsx)
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("usuario", JSON.stringify(data.usuario));
+      // Conta criada: já entra logado. O login() do contexto grava no
+      // localStorage E avisa o site inteiro (RotaPrivada, cabeçalho etc.).
+      login(data.token, data.usuario);
       navigate("/", { replace: true });
     } catch (err) {
       if (!err.response) {
