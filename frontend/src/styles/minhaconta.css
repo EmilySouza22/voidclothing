@@ -1,0 +1,337 @@
+.conta {
+  --void-black: #111111;
+  --void-gray: #8c8c8c;
+  --void-card: #f4f4f2;
+  --void-line: #d6d6d2;
+  --void-error: #b3261e;
+
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+  font-family: "Inter", Arial, sans-serif;
+  color: var(--void-black);
+}
+
+/* ---------- Topo ---------- */
+.conta__topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.conta__topo h1 {
+  margin: 0;
+  font-family: "Archivo", Arial, sans-serif;
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.conta__topo p {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+  color: #55554f;
+}
+
+.conta__botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid var(--void-black);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--void-black);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.conta__botao:hover {
+  background: #ebebe8;
+}
+
+.conta__botao:focus-visible,
+.conta__editar:focus-visible,
+.conta__filtro:focus-visible {
+  outline: 2px solid var(--void-black);
+  outline-offset: 2px;
+}
+
+/* ---------- Corpo: menu + conteúdo ---------- */
+.conta__corpo {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 2rem;
+}
+
+.conta__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: start;
+  padding-right: 2rem;
+  border-right: 1px solid var(--void-line);
+}
+
+.conta__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: var(--void-card);
+  color: var(--void-black);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.conta__menu-item:hover {
+  background: #e9e9e6;
+}
+
+.conta__menu-item--ativo,
+.conta__menu-item--ativo:hover {
+  background: var(--void-black);
+  color: #ffffff;
+}
+
+.conta__menu-item--off,
+.conta__menu-item--off:hover {
+  background: var(--void-card);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------- Cartão do perfil ---------- */
+.conta__perfil {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  background: var(--void-card);
+}
+
+.conta__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: #d9d9d6;
+}
+
+.conta__nome {
+  margin: 0;
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.conta__email {
+  margin: 0.25rem 0 0.9rem;
+  font-size: 0.85rem;
+}
+
+.conta__editar {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--void-black);
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.conta__editar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.conta__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 2rem;
+  border-left: 1px solid var(--void-line);
+  text-align: center;
+}
+
+.conta__stat strong {
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.conta__stat span {
+  font-size: 0.78rem;
+  color: #55554f;
+}
+
+/* ---------- Pedidos ---------- */
+.conta__pedidos {
+  margin-top: 2rem;
+}
+
+.conta__pedidos-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.conta__pedidos-topo h2 {
+  margin: 0;
+  font-family: "Archivo", Arial, sans-serif;
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+}
+
+.conta__filtro {
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--void-line);
+  border-radius: 6px;
+  background: #ffffff;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--void-black);
+}
+
+.conta__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.conta__pedido {
+  display: grid;
+  grid-template-columns: 4rem 1fr 11rem auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: var(--void-card);
+}
+
+.conta__pedido-img {
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #d9d9d6;
+}
+
+.conta__pedido-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.conta__pedido-info strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.conta__pedido-info span {
+  font-size: 0.8rem;
+  color: #55554f;
+}
+
+.conta__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-self: start;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  background: #e4e4e1;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.conta__status--entregue {
+  background: #dcebdc;
+  color: #1f5f2c;
+}
+
+.conta__status--cancelado {
+  background: #fbeceb;
+  color: var(--void-error);
+}
+
+.conta__detalhes {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--void-black);
+  text-decoration: none;
+}
+
+.conta__detalhes:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Avisos (carregando, erro, vazio) ---------- */
+.conta__aviso {
+  padding: 1.5rem;
+  border-radius: 10px;
+  background: var(--void-card);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.conta__aviso p {
+  margin: 0 0 0.75rem;
+}
+
+.conta__aviso a {
+  color: var(--void-black);
+  font-weight: 600;
+}
+
+/* ---------- Telas menores (versão completa para celular fica para a próxima etapa) ---------- */
+@media (max-width: 900px) {
+  .conta__corpo {
+    grid-template-columns: 1fr;
+  }
+
+  .conta__menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .conta__perfil {
+    grid-template-columns: auto 1fr;
+  }
+
+  .conta__stat {
+    padding: 0;
+    border-left: 0;
+  }
+
+  .conta__pedido {
+    grid-template-columns: 4rem 1fr;
+  }
+}
