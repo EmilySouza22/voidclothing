@@ -39,7 +39,28 @@ A proposta é centralizar os principais processos da loja em um único ambiente,
 
 ## Design
 
-O protótipo das telas está no Figma: [Void - Figma](https://www.figma.com/design/SulDYgCUK81IAmuAcRHY5r/Void?node-id=0-1&t=EKTI0P7aAESgEbg3-1)
+Identidade visual moderna, limpa e minimalista, com estética streetwear e urbana. Nada de cores vibrantes: o destaque fica por conta das fotos dos produtos.
+
+[![Figma](https://img.shields.io/badge/Ver_protótipo_no_Figma-000000?style=for-the-badge&logo=figma&logoColor=FFFFFF)](https://www.figma.com/design/SulDYgCUK81IAmuAcRHY5r/Void?node-id=0-1&t=EKTI0P7aAESgEbg3-1)
+
+### Paleta de cores
+
+| Cor | Código | Uso |
+|---|---|---|
+| ![#111111](https://img.shields.io/badge/%20%20%20%20%20%20%20-111111?style=flat-square) | `#111111` | Textos, botões e fundos escuros |
+| ![#000000](https://img.shields.io/badge/%20%20%20%20%20%20%20-000000?style=flat-square) | `#000000` | Títulos e estados de destaque |
+| ![#8c8c8c](https://img.shields.io/badge/%20%20%20%20%20%20%20-8c8c8c?style=flat-square) | `#8c8c8c` | Textos secundários e detalhes |
+| ![#FFFFFF](https://img.shields.io/badge/%20%20%20%20%20%20%20-FFFFFF?style=flat-square) | `#FFFFFF` | Fundos e textos sobre áreas escuras |
+
+### Tipografia
+
+- **Archivo** (larga e pesada): títulos e destaques
+- **Inter**: textos, formulários e botões
+
+### Referências
+
+- **Shopee:** facilidade de navegação, organização dos produtos e processo de compra
+- **Nike:** apresentação visual dos produtos, identidade da marca e organização das coleções
 
 ## Estrutura
 
