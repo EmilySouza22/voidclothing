@@ -16,32 +16,41 @@ function gerarToken(usuario) {
 // POST /api/auth/cadastro
 async function cadastrar(req, res) {
   try {
-    const { nome, email, senha, telefone } = req.body;
+    const { nome, email, senha, telefone, aceitouTermos } = req.body;
 
-    // Validação na entrada (requisito de segurança)
-    if (!nome || nome.trim().length < 3)
+    // VALIDAÇÃO NA ENTRADA: o back nunca confia no que o front mandou.
+    if (!nome || nome.trim().length < 3 || nome.trim().length > 100)
       return res.status(400).json({ erro: 'Informe o nome completo.' });
-    if (!email || !EMAIL_REGEX.test(email))
+
+    if (!email || !EMAIL_REGEX.test(email) || email.length > 150)
       return res.status(400).json({ erro: 'E-mail inválido.' });
-    if (!senha || senha.length < 8)
-      return res.status(400).json({ erro: 'A senha precisa ter pelo menos 8 caracteres.' });
+
+    // bcrypt só considera os primeiros 72 caracteres, por isso o limite.
+    if (!senha || senha.length < 8 || senha.length > 72)
+      return res.status(400).json({ erro: 'A senha precisa ter entre 8 e 72 caracteres.' });
+
+    // REGRA LGPD: sem consentimento não cria conta, e registramos QUANDO foi dado.
+    if (aceitouTermos !== true)
+      return res.status(400).json({ erro: 'É preciso aceitar os Termos de Uso e a Política de Privacidade.' });
 
     const senhaHash = await bcrypt.hash(senha, 10);
+    const emailLimpo = email.trim().toLowerCase();
 
     // Consulta parametrizada (?) = proteção contra SQL injection.
     // REGRA: perfil FIXO 'cliente'. Nunca aceitar perfil vindo do body.
     const [resultado] = await db.execute(
-      `INSERT INTO usuarios (nome, email, senha_hash, telefone, perfil)
-       VALUES (?, ?, ?, ?, 'cliente')`,
-      [nome.trim(), email.trim().toLowerCase(), senhaHash, telefone || null]
+      `INSERT INTO usuarios (nome, email, senha_hash, telefone, perfil, consentimento_em)
+       VALUES (?, ?, ?, ?, 'cliente', NOW())`,
+      [nome.trim(), emailLimpo, senhaHash, telefone || null]
     );
 
     const usuario = { id: resultado.insertId, perfil: 'cliente' };
     return res.status(201).json({
       token: gerarToken(usuario),
-      usuario: { id: usuario.id, nome: nome.trim(), email: email.trim().toLowerCase(), perfil: 'cliente' },
+      usuario: { id: usuario.id, nome: nome.trim(), email: emailLimpo, perfil: 'cliente' },
     });
   } catch (err) {
+    // O UNIQUE do e-mail no banco é a garantia final contra duplicidade.
     if (err.code === 'ER_DUP_ENTRY')
       return res.status(409).json({ erro: 'Este e-mail já está cadastrado.' });
     console.error(err);
@@ -96,4 +105,4 @@ async function me(req, res) {
   }
 }
 
-module.exports = { cadastrar, login, me }; 
+module.exports = { cadastrar, login, me };
