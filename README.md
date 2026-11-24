@@ -37,6 +37,10 @@ A proposta é centralizar os principais processos da loja em um único ambiente,
 - Banco de dados: MySQL
 - Autenticação: JWT
 
+## Design
+
+O protótipo das telas está no Figma: [Void - Figma](https://www.figma.com/design/SulDYgCUK81IAmuAcRHY5r/Void?node-id=0-1&t=EKTI0P7aAESgEbg3-1)
+
 ## Estrutura
 
 ```text
