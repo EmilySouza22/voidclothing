@@ -105,10 +105,3 @@ npm run dev
 Acesse `http://localhost:5173`. O frontend repassa as chamadas `/api` para o backend, então os dois precisam estar rodando.
 
 Para testar a conexão: `http://localhost:5173/exemplo`.
-
-## Fluxo de trabalho
-
-- A `main` é protegida: nada de commit direto.
-- Cada tela em uma branch própria: `feat/catalogo`, `feat/carrinho`...
-- Alterações vão por Pull Request, revisado pela outra pessoa.
-- Se mudar o banco, atualize `database/schema.sql` e `seed.sql` e avise a outra.
