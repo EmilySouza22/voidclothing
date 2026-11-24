@@ -10,6 +10,7 @@ import Cadastro from './pages/Cadastro';
 import Carrinho from './pages/Carrinho';
 import Checkout from './pages/Checkout';
 import MeusPedidos from './pages/MeusPedidos';
+import DetalhePedido from './pages/DetalhePedido';
 import MinhaConta from './pages/MinhaConta';
 import Exemplo from './pages/Exemplo';
 import NotFound from './pages/NotFound';
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/carrinho" element={<Carrinho />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/meus-pedidos" element={<MeusPedidos />} />
+          <Route path="/meus-pedidos/:id" element={<DetalhePedido />} />
           <Route path="/minha-conta" element={<MinhaConta />} />
         </Route>
 

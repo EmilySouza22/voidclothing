@@ -325,7 +325,15 @@ export default function MinhaConta() {
                   return (
                     <li key={p.id} className="conta__pedido">
                       <div className="conta__pedido-img">
-                        {p.imagem_url && <img src={p.imagem_url} alt="" />}
+                        {p.imagem_url && (
+                          <img
+                            src={p.imagem_url}
+                            alt=""
+                            onError={(e) => {
+                              e.currentTarget.style.display = "none";
+                            }}
+                          />
+                        )}
                       </div>
 
                       <div className="conta__pedido-info">
@@ -340,7 +348,7 @@ export default function MinhaConta() {
                         {st.texto}
                       </span>
 
-                      <Link className="conta__detalhes" to="/meus-pedidos">
+                      <Link className="conta__detalhes" to={`/meus-pedidos/${p.id}`}>
                         Ver detalhes <Icone nome="seta" tamanho={16} />
                       </Link>
                     </li>
