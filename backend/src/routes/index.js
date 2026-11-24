@@ -21,5 +21,6 @@ router.use('/pedidos', require('./pedidos.routes'));
 router.use('/pagamentos', require('./pagamentos.routes'));
 router.use('/clientes', require('./clientes.routes'));
 router.use('/dashboard', require('./dashboard.routes'));
+router.use('/admin', require('./admin.routes'));
 
 module.exports = router;
